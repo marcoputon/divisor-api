@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PessoaService {
@@ -34,12 +35,19 @@ public class PessoaService {
     }
 
 
+    public Set<Produto> buscarProdutosPorPessoa (Long idPessoa) {
+        Pessoa pessoa = this.buscarPessoa(idPessoa);
+        return pessoa.getProdutos();
+    }
+
+
+    // Não achei necessário criar um serviço para produto_pessoa. Criar se precisar de mais métodos.
     public Pessoa relacionarProduto (Long idPessoa, Long idProduto) {
         Pessoa pessoa = this.buscarPessoa(idPessoa);
         Produto produto = produtoService.buscarProduto(idProduto);
         pessoa.getProdutos().add(produto);
 
-        return pessoaRepository.save(pessoa);
+        return this.salvar(pessoa);
     }
 
 }
