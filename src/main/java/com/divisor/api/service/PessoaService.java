@@ -2,6 +2,7 @@ package com.divisor.api.service;
 
 import com.divisor.api.entity.Pessoa;
 import com.divisor.api.entity.Produto;
+import com.divisor.api.exception.RecursoInexistenteException;
 import com.divisor.api.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class PessoaService {
 
     public Pessoa buscarPessoa (Long idPessoa) {
         return pessoaRepository.findById(idPessoa)
-                .orElseThrow( () -> new RuntimeException("Erro ao buscar pessoa de id " + idPessoa) );
+                .orElseThrow( () -> new RecursoInexistenteException("Pessoa não encontrada: " + idPessoa) );
     }
 
 

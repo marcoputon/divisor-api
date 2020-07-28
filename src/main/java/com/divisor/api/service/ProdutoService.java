@@ -32,7 +32,7 @@ public class ProdutoService {
 
     public Produto buscarProduto (Long idProduto) {
         return produtoRepository.findById(idProduto)
-                .orElseThrow( () -> new RuntimeException("Erro ao buscar produto de id " + idProduto));
+                .orElseThrow( () -> new RuntimeException("Produto não encontrado: " + idProduto));
     }
 
 
