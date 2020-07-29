@@ -19,7 +19,7 @@ public class ServiceExceptionHandler {
 
 
     @ExceptionHandler(RecursoInexistenteException.class)
-    public ResponseEntity<Object> handlePagamentoException(RecursoInexistenteException rie) {
+    public ResponseEntity<Object> handleRecursoInexistenteException(RecursoInexistenteException rie) {
         return ResponseEntity.badRequest().body(formatarMensagem(rie));
     }
 }
