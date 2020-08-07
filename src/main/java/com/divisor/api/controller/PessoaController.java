@@ -40,11 +40,21 @@ public class PessoaController {
             new PessoaDto(pessoaService.relacionarProduto(idPessoa, idProduto));
     }
 
+
     @GetMapping("/pessoas/{idPessoa}/produtos")
     public Set<ProdutoDto> buscarProdutosPorPessoa (@PathVariable Long idPessoa) {
         return
             ProdutoDto.produtosParaProdutoDtos(
                 pessoaService.buscarProdutosPorPessoa(idPessoa)
+            );
+    }
+
+
+    @GetMapping("/pessoas/{idPessoa}/produtos/disponiveis")
+    public Set<ProdutoDto> buscarProdutosDisponiveisPorPessoa (@PathVariable Long idPessoa) {
+        return
+            ProdutoDto.produtosParaProdutoDtos(
+                pessoaService.buscarProdutosDisponiveisPorPessoa(idPessoa)
             );
     }
 

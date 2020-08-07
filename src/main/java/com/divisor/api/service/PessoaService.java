@@ -42,6 +42,12 @@ public class PessoaService {
     }
 
 
+    public Set<Produto> buscarProdutosDisponiveisPorPessoa (Long idPessoa) {
+        this.buscarPessoa(idPessoa);
+        return produtoService.buscarProdutosDisponiveisporPessoa(idPessoa);
+    }
+
+
     // Não achei necessário criar um serviço para produto_pessoa. Criar se precisar de mais métodos.
     public Pessoa relacionarProduto (Long idPessoa, Long idProduto) {
         Pessoa pessoa = this.buscarPessoa(idPessoa);
