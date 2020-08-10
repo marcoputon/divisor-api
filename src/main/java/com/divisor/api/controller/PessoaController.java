@@ -4,9 +4,12 @@ import com.divisor.api.dto.PessoaDto;
 import com.divisor.api.dto.ProdutoDto;
 import com.divisor.api.entity.Pessoa;
 import com.divisor.api.service.PessoaService;
+import com.divisor.api.service.ProdutoPessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import java.util.Set;
 
 @RestController
@@ -14,6 +17,9 @@ public class PessoaController {
 
     @Autowired
     PessoaService pessoaService;
+
+    @Autowired
+    ProdutoPessoaService produtoPessoaService;
 
 
     @GetMapping("/pessoas")
@@ -56,6 +62,13 @@ public class PessoaController {
             ProdutoDto.produtosParaProdutoDtos(
                 pessoaService.buscarProdutosDisponiveisPorPessoa(idPessoa)
             );
+    }
+
+
+    @DeleteMapping("/pessoas/{idPessoa}")
+    public ResponseEntity<Void> deletarPessoa (@PathVariable Long idPessoa) {
+        pessoaService.deletarPessoa(idPessoa);
+        return ResponseEntity.ok().build();
     }
 
 }

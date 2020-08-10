@@ -17,9 +17,6 @@ public class ProdutoController {
     @Autowired
     ProdutoService produtoService;
 
-    @Autowired
-    PessoaService pessoaService;
-
 
     @GetMapping("/produtos")
     public Set<ProdutoDto> listarPessoas () {

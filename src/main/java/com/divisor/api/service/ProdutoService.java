@@ -21,7 +21,7 @@ public class ProdutoService {
     private ProdutoRepository produtoRepository;
 
     @Autowired
-    private ProdutoPessoaRepository produtoPessoaRepository;
+    private ProdutoPessoaService produtoPessoaService;
 
     @Autowired
     private PessoaService pessoaService;
@@ -73,7 +73,7 @@ public class ProdutoService {
     @Transactional
     public void deletarProduto (Long idProduto) {
         this.buscarProduto(idProduto);
-        produtoPessoaRepository.deleteByIdProduto(idProduto);
+        produtoPessoaService.deletarPorProduto(idProduto);
         produtoRepository.deleteById(idProduto);
     }
 

@@ -10,8 +10,14 @@ public class ProdutoPessoaService {
     @Autowired
     ProdutoPessoaRepository produtoPessoaRepository;
 
-    public void deletarPorProduto (Long idProduto) {
 
+    public void deletarPorProduto (Long idProduto) {
+        this.produtoPessoaRepository.deletarPorProduto(idProduto);
+    }
+
+
+    public void deletarPorPessoa (Long idPessoa) {
+        this.produtoPessoaRepository.deletarPorPessoa(idPessoa);
     }
 
 }

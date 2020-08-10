@@ -7,6 +7,7 @@ import com.divisor.api.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +19,9 @@ public class PessoaService {
 
     @Autowired
     private ProdutoService produtoService;
+
+    @Autowired
+    private ProdutoPessoaService produtoPessoaService;
 
 
     public List<Pessoa> listar () {
@@ -56,5 +60,14 @@ public class PessoaService {
 
         return this.salvar(pessoa);
     }
+
+
+    @Transactional
+    public void deletarPessoa (Long idPessoa) {
+        this.buscarPessoa(idPessoa);
+        produtoPessoaService.deletarPorPessoa(idPessoa);
+        pessoaRepository.deleteById(idPessoa);
+    }
+
 
 }
