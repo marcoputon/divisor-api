@@ -3,10 +3,12 @@ package com.divisor.api.service;
 import com.divisor.api.dto.ProdutoDto;
 import com.divisor.api.entity.Pessoa;
 import com.divisor.api.entity.Produto;
+import com.divisor.api.repository.ProdutoPessoaRepository;
 import com.divisor.api.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +19,9 @@ public class ProdutoService {
 
     @Autowired
     private ProdutoRepository produtoRepository;
+
+    @Autowired
+    private ProdutoPessoaRepository produtoPessoaRepository;
 
     @Autowired
     private PessoaService pessoaService;
@@ -62,6 +67,14 @@ public class ProdutoService {
     public Produto relacionarProduto (Long idPessoa, Long idProduto) {
         pessoaService.relacionarProduto(idPessoa, idProduto);
         return this.buscarProduto(idProduto);
+    }
+
+
+    @Transactional
+    public void deletarProduto (Long idProduto) {
+        this.buscarProduto(idProduto);
+        produtoPessoaRepository.deleteByIdProduto(idProduto);
+        produtoRepository.deleteById(idProduto);
     }
 
 }

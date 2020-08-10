@@ -6,6 +6,7 @@ import com.divisor.api.entity.Produto;
 import com.divisor.api.service.PessoaService;
 import com.divisor.api.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Set;
@@ -51,6 +52,13 @@ public class ProdutoController {
             PessoaDto.pessoasParaPessoaDtos(
                 produtoService.buscarPessoasPorProduto(idProduto)
             );
+    }
+
+
+    @DeleteMapping("/produtos/{idProduto}")
+    public ResponseEntity<Void> deletarProduto (@PathVariable Long idProduto) {
+        produtoService.deletarProduto(idProduto);
+        return ResponseEntity.ok().build();
     }
 
 }
